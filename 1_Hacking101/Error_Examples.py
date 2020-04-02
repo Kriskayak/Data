@@ -45,11 +45,11 @@ def symantic_error(a=4):
     return p
 
 def embedded_error(a=1):
-    b=a+45
+    b = a + 45
+    def func(x):
+        y = x-five+3
+        return y
     c = func(b)
     return c+2
 
 
-def func(x):
-    y = x-five+3
-    return y
