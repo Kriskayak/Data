@@ -22,9 +22,8 @@ import ipdb
 
 #ipdb.set_trace()
 
-
-def syntax_error(a=1):
-    b = a*34)
+def syntax_error(a = 1):
+    b = a * 34
     return b
 
 def runtime_error():
@@ -35,21 +34,21 @@ def runtime_error():
     third = 3
     extra = input("What is the extra value?")
     
-    total = first+seocnd+third+extra
+    total = first + second + third + int(extra)
     print(total)
     return total
 
-def symantic_error(a=4):
-    sqrta = 4**(1/2)
-    p = 3.14*sqrta
+def symantic_error(a = 4):
+    sqrt_a = 4**(1/2)
+    p = 3.14 * sqrt_a
     return p
 
-def embedded_error(a=1):
+def embedded_error(a = 1):
     b = a + 45
     def func(x):
-        y = x-five+3
+        y = x - 5 + 3
         return y
     c = func(b)
-    return c+2
+    return c + 2
 
 
