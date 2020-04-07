@@ -14,7 +14,7 @@
 # to play around and get used to the tool. It is very powerful!
 
 # To use python debugger, run this line in your console:
-import ipdb
+#import ipdb
 
 # Then uncomment the below line and place it somewhere in the code
 # immediately before where you think an error is happening. This will
@@ -24,7 +24,7 @@ import ipdb
 
 
 def syntax_error(a=1):
-    b = a*34)
+    b = (a*34)
     return b
 
 def runtime_error():
@@ -35,7 +35,7 @@ def runtime_error():
     third = 3
     extra = input("What is the extra value?")
     
-    total = first+seocnd+third+extra
+    total = first+second+third+extra
     print(total)
     return total
 
@@ -47,7 +47,7 @@ def symantic_error(a=4):
 def embedded_error(a=1):
     b = a + 45
     def func(x):
-        y = x-five+3
+        y = x-5+3
         return y
     c = func(b)
     return c+2
