@@ -1,0 +1,139 @@
+###################################
+# The very basics
+
+# The pwd command tells you the "path" to your present working directory
+pwd
+# You will likely find yourself in your "home" directory. 
+
+# The ls command lists all the files in a directory (folder)
+ls
+# This lists non-hidden files and directories in your current directory
+
+# The ls command also can take arguments and options. Try
+ls -F
+# This lists non-hidden directories with a slash at the end to distinguish them from files.
+
+# This lists ALL files and directories in your current directory (even hidden ones).
+ls -a
+
+
+###################################
+# Navigating with shell commands
+
+# The cd command (change directory) is the primary command used to navigate your computer
+cd
+# Entering this command with no arguments will put you in your home directory (you are probably already there).
+
+# When used with an argument, it will "move you" into the specified directory (if it exists)
+cd Documents
+
+# Then typing ls will allow you to see what is in your new directory.
+ls
+
+# Try this command
+cd Flumberplomp
+# You should see an error since you don't have a directory named Flumberplomp in your Documents directory.
+
+# If you ever get "lost" and don't know where you are. Simply execute the pwd command
+pwd
+
+# The double dot ("..") is a special character in UNIX that refers to the directory below you in your directory tree. So, if you are currently in your Documents directory, you can enter:
+cd ..
+# That will move you back one step.
+
+
+###################################
+# File handling
+
+# The mkdir command makes a directory in the directory that you are in. Let's first navigate to your Desktop...
+cd
+# This gets you to your home directory
+cd Desktop
+# This will put you on your Desktop
+
+# This makes a directory (folder) named test on you Desktop.
+mkdir test
+# Go ahead... take a look!
+
+# You can now navigate into that directory
+cd test
+
+# It will be empty
+ls
+# This should return nothing.
+
+# If you want to create an empty file you can use the touch command.
+touch garbage
+ls
+# Now you should see a file
+ls -l garbage
+# The l option gives you more information about the file. You will see that it has "0" bytes (it is empty)
+
+# The history command will print out a list of commands that you have typed in your Terminal along with the time that you typed them. This can be useful for remembering how to do things, or to create a "shell" script that includes commands you have already typed.
+history
+
+# You can use the redirect command to make a file out of your shell history
+history > my_history.txt
+ls
+
+# You can look at a text file easily with the UNIX utility called "less" (don't ask why it is called that).
+less my_history.txt
+# To scroll through the file you can press the space bar.
+# To advance one line at a time press Cntrl-n
+# To go back one line at a time press Cntrl-p
+# To go to the beginning of the file press p
+# To exit the "less" environment press q.
+
+# You an also use the Mac OSX UNIX command open to open the file with some default text editor
+open my_history.txt
+
+###################################
+# Potentially destructive commands
+# (WARNING)
+
+# You can move files and directories with the command mv. It takes two arguments, the first specifies the file or directory you want to move, the second specifies where you want it moved.
+mv garbage ../
+# This means move the file garbage back one directory. You can either type
+ls ..
+# Which means list the directory back one step. Or you can navigate one directory back and issue the ls command.
+cd ..
+ls
+
+# To delete or "remove" a file use the command rm
+rm garbage
+ls
+# This is a dangerous command that can do irreversible damage. So BE CAREFUL!
+
+# Let's delete your history file. First let's remember where we are, and take a look at what files are in our current directory.
+pwd
+ls
+cd test
+rm my_history.txt
+ls
+# Now you see your directory is empty again.
+
+# Let us navigate one directory back.
+cd ..
+ls
+# You should see your test directory in the list of directories.
+
+# To remove an empty directory you use the command rmdir
+rmdir test
+ls
+# Now you see that test no longer exists! To remove a directory that still has stuff in it, you use rm with the option -r (recursive). This is one of the most dangerous UNIX commands, but it is also very useful at times.
+
+
+###################################
+# Homework
+# 1. Navigate your computer on the command line (not with Finder) and create a directory for this class where you will keep all your course material consolidated. The exact location will depend on your organizational preferences. But as a default I would suggest a path something like this:
+
+/Users/yourname/Classes/Spring2020/Data_Science
+
+# But however you want to organize is fine. You may have to create several new directories to accomplish your goal.
+
+# 2. Navigate to your class directory and move or copy all the digital materials for this course into that directory.
+
+
+# 3. This is where you will want your git repo to live as well. If you have already created it somewhere else. You can simply move your repo with a command like:
+
+mv datasci2020 /Users/yourname/Classes/Spring2020/Data_Science
