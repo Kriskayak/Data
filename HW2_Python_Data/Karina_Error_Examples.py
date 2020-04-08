@@ -39,7 +39,7 @@ def runtime_error():
     return total
 
 def symantic_error(a = 4):
-    sqrt_a = 4**(1/2)
+    sqrt_a = a**(1/2) # add a float if in python27
     p = 3.14 * sqrt_a
     return p
 
