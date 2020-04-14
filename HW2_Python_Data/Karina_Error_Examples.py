@@ -51,4 +51,8 @@ def embedded_error(a = 1):
     c = func(b)
     return c + 2
 
+# js comments
+#------------
+# - Looks good. 
 
+# 10/10

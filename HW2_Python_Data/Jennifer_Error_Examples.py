@@ -53,3 +53,11 @@ def embedded_error(a=1):
     return c+2
 
 
+# js comments
+#------------
+# - forcing integer values in runtime_error function not necessary
+# - symantic_error does not function properly. The sqrta variable is not the square root of a
+
+# 9/10
+
+
