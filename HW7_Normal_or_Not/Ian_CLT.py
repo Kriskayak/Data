@@ -7,6 +7,7 @@ from IPython import get_ipython
 import numpy as np
 import matplotlib.pyplot as plt
 from tqdm import tqdm
+from statsmodels.stats.diagnostic import normal_ad
 get_ipython().run_line_magic('config', "InlineBackend.figure_format = 'retina'")
 get_ipython().run_line_magic('matplotlib', 'inline')
 
@@ -50,7 +51,9 @@ x,y = gauss(x0=np.mean(dist),sig=np.std(dist))
 plt.plot(x,y,'r--')
 xlim = plt.xlim(1.56,1.74)
 
-
+# %%
+ad2,pval = normal_ad(dist,axis=0)
+print(pval)
 # %%
 
 
