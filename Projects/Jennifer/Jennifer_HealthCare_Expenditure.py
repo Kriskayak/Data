@@ -2,16 +2,26 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
-df= pd.read_csv("/Users/jennifer/Jen_Data_Science/healthcare-expenditure-vs-gdp.csv", sep=',')
+#--------------------------------------------------
+# js - The data file lives in the same directory
+# as this script, so no path designation is needed
+path = '/Users/jennifer/Jen_Data_Science/'
+df= pd.read_csv("healthcare-expenditure-vs-gdp.csv", sep=',')
 
 type(df)
 
 len(df)
 
-data= pd.read_csv('/Users/jennifer/Jen_Data_Science/healthcare-expenditure-vs-gdp.csv', sep=',',
+data= pd.read_csv('healthcare-expenditure-vs-gdp.csv', sep=',',
                   usecols=[0,1,2,3,4],
                   skiprows=[0],header=0,names=['Country','Code','Year','GDP per Capita','Healthcare Expenditure per Capita'])
 
+#--------------------------------------------------
+# js - These commands are good to figure out what
+# is in a dataframe, but you don't need to preserve
+# them in your script. Better to write all the
+# meta info you may need into a comment in the
+# script
 df.shape
 
 # Over here we see the columns names and their data types
@@ -20,6 +30,8 @@ df.dtypes
 # This provides some statistics on the numerical data
 df.describe()
 
+#--------------------------------------------------
+# js - These are extraneous comments
 
 # ## Dealing with missing values
 # 
@@ -39,6 +51,9 @@ df = df.dropna(axis = 0, how = 'any')  #drop rows with any column having np.nan 
 
 #Rename columns
 #df.rename(index =str, columns = {'patient_id':'patient_id'})
+
+#--------------------------------------------------
+# js - Things like this don't belong in a script
 df
 
 
@@ -47,6 +62,8 @@ df
 # ## Inspecting duplicates
 # To view repeating rows we can start off by looking at the number of unique values in each column.
 
+#--------------------------------------------------
+# js - These comments are not useful
 # In[13]:
 
 
@@ -80,6 +97,10 @@ df[df.duplicated(keep = 'last')]
 
 # In[17]:
 
+
+#--------------------------------------------------
+# js - The following code does not seem to be
+# relevant to your dataset 
 
 # # This shows all instances where patient_id shows up more than once, but may have varying column values
 df[df.duplicated(subset = 'patient_id', keep =False)].sort_values('patient_id')
@@ -272,4 +293,16 @@ combined_df
 
 
 
+'''
+js comments
+-----------
+ - Good start
 
+ - There is quite a bit of cleaning up you need to do
+
+ - You will need to get rid of all the extraneous code and comments
+
+ - 8/10
+
+
+'''
