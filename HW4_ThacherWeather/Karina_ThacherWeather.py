@@ -150,7 +150,7 @@ statistic_max, pvalue_max = ttest_ind(maxs1, maxs2)
 # significantly different. Also, your variable
 # "pvalue" is not defined. I fixed... 
 
-if pvalue_max < 0.05:
+if pvalue_max > 0.05:
     print("The mean high is not significantly different between years")
 else:
     print("The mean highs are significantly different")
@@ -158,7 +158,7 @@ else:
 # Compare the mins
 statistic_min, pvalue_min = ttest_ind(mins1, mins2)
 
-if pvalue_min < 0.05:
+if pvalue_min > 0.05:
     print("The mean low is not significantly different between years")
 else:
     print("The mean lows are significantly different")
