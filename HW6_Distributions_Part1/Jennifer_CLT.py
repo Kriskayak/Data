@@ -1,6 +1,19 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+
+#--------------------------------------------------
+# js - You might want to use block commenting for
+# this part. A block comment is started and ended
+# with a triple quote. For example
+'''
+This
+is
+a 
+block
+comment
+'''
+
 # # The Central Limit Theorem
 # In this exercise we will explore and demonstrate the Central Limit Theorem—a very important idea that arises in much of science and data analysis. The theorem states that the average of a series of numbers will always follow a Gaussian, or "normal," probability distribution regardless of the probability distribution that the data points were drawn from.
 # 
@@ -10,6 +23,8 @@
 
 # Let's first take a look at a gaussian function
 
+#--------------------------------------------------
+# js - Get rid of these comments...
 # In[12]:
 
 
@@ -17,8 +32,12 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from tqdm import tqdm
-get_ipython().run_line_magic('config', "InlineBackend.figure_format = 'retina'")
-get_ipython().run_line_magic('matplotlib', 'inline')
+
+#--------------------------------------------------
+# js - These commands are only relevant for jupyter
+# notebooks
+#get_ipython().run_line_magic('config', "InlineBackend.figure_format = 'retina'")
+#get_ipython().run_line_magic('matplotlib', 'inline')
 
 
 # To make life easy, let's first make a function that creates a Gaussian curve
@@ -93,7 +112,8 @@ print(np.sqrt(np.e),np.mean(dist))
 
 # In[20]:
 
-
+#--------------------------------------------------
+# js - you don't need any of this!
 size = 10000
 plt.figure(1,figsize=(8,6))
 dist1 = np.random.chisquare(1,100000)
@@ -142,3 +162,16 @@ xlim = plt.xlim(0.98,1.02)
 
 # ## Homework
 # Demonstrate the CLT with a different distribution and save it in a python script or module. When complete you will push that code to the same directory as this notebook on the repo. Please call your script "YourName_CLT.py". There are many distributions you can choose from <a href="https://docs.scipy.org/doc/numpy-1.14.0/reference/routines.random.html">here</a>. Also, you may (are expected to) copy and edit code from this notebook to commplete this task.
+
+
+'''
+js comments
+-----------
+ - You should really clean up this code more. Text editing is a good skill that needs practice
+
+ - Some of your commands are only relevant for jupyter notebooks
+
+ - 8/10
+
+
+'''

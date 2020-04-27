@@ -25,10 +25,6 @@ type(df)
 
 len(df)
 
-data= pd.read_csv("/Users/jennifer/Jen_Data_Science/datasci2020/Projects/Jennifer/healthcare-expenditure-vs-gdp.csv", sep=',',
-                  usecols=[0,1,2,3,4,5],
-                  skiprows=[0],header=0,names=['Country','Code','Year','GDP per Capita','Healthcare Expenditure per Capita','Population'])
-
 df.shape
 
 # Over here we see the columns names and their data types

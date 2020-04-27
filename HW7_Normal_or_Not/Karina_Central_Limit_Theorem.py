@@ -31,15 +31,42 @@ pbar.close()
 dist /= np.float(ndist)
 
 # Plot the resultant distribution
-hist = plt.hist(dist,bins=100,normed=True,edgecolor='none')
+#--------------------------------------------------
+# js -  You've got some depreciated keywords. Also, you probably want to do some
+#hist = plt.hist(dist,bins=100,normed=True,edgecolor='none')
+# interactive plotting
+plt.ion()
+plt.figure(1)
+plt.clf()
+hist = plt.hist(dist,bins=30,density=True,edgecolor='none')
 
 
 # Overplot gaussian
-hist = plt.hist(dist,bins=100,normed=True,edgecolor='none')
+#--------------------------------------------------
+# js - Again some depreciated kwargs
+#hist = plt.hist(dist,bins=100,normed=True,edgecolor='none')
+hist = plt.hist(dist,bins=30,density=True,edgecolor='none')
 x,y = gauss(x0=np.mean(dist),sig=np.std(dist))
+plt.title("Central Limit Theorem")
+plt.xlabel("x values")
+plt.ylabel("Frequency")
 plt.plot(x,y,'r--')
 xlim = plt.xlim(1.56,1.74)
+#--------------------------------------------------
+# js - Make some labels! :)
 
 """ Andersen-Darling Test """
 ad, p = statsmodels.stats.diagnostic.normal_ad(dist)
 print(p)
+
+'''
+js comments
+-----------
+- Binning on final plot is a bit sparse
+
+- Where is the threshold for number of averages to be consistent
+  with normal dist?
+
+9/10
+'''
+

@@ -1,15 +1,19 @@
 # To add a new cell, type '# %%'
 # To add a new markdown cell, type '# %% [markdown]'
 # %%
-from IPython import get_ipython
+#--------------------------------------------------
+# js - Don't need this for standard console only jupyter notebook
+#from IPython import get_ipython
 
 # %%
 import numpy as np
 import matplotlib.pyplot as plt
 from tqdm import tqdm
 from statsmodels.stats.diagnostic import normal_ad
-get_ipython().run_line_magic('config', "InlineBackend.figure_format = 'retina'")
-get_ipython().run_line_magic('matplotlib', 'inline')
+#--------------------------------------------------
+# js - These following lines are only for jupyter notebooks
+#get_ipython().run_line_magic('config', "InlineBackend.figure_format = 'retina'")
+#get_ipython().run_line_magic('matplotlib', 'inline')
 
 
 # %%
@@ -56,4 +60,20 @@ ad2,pval = normal_ad(dist,axis=0)
 print(pval)
 # %%
 
+
+'''
+js comments
+-----------
+- You can get rid of the residual comments from the other assigment. 
+
+- Comments could be more comprehensive
+
+- Use density instead of normed for histogram call
+
+- Results look good. Where is the threshold of number of averages before you
+  are consistent with Normal?
+
+8/10
+
+'''
 

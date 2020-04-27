@@ -11,6 +11,12 @@ def gauss(sig=1,x0=0):
     y = 1.0/(np.sqrt(2*np.pi)*sig)*np.exp(-(x-x0)**2/(2*sig**2))
     return x,y
 
+#--------------------------------------------------
+# js - I added standard interactive plotting
+#      commands for you. Use them!
+plt.ion()
+plt.figure(1)
+plt.clf()
 dist = np.random.chisquare(1,100000)
 plt.hist(dist[dist<10],bins=100,density=True)
 plt.axvline(x=np.sqrt(np.e),linestyle='-',color='red')
@@ -20,7 +26,8 @@ print(np.sqrt(np.e),np.mean(dist))
 
 
 size = 10000
-plt.figure(1,figsize=(8,6))
+plt.figure(2,figsize=(8,6))
+plt.clf()
 dist1 = np.random.chisquare(1,100000)
 dist2 = np.random.chisquare(1,100000)
 dist3 = np.random.chisquare(1,100000)
@@ -44,9 +51,14 @@ pbar.close()
 
 dist /= np.float(ndist)
 
+#--------------------------------------------------
+# js - don't need the following
+plt.figure(3)
+plt.clf()
 hist = plt.hist(dist,bins=100,density=True,edgecolor='none')
 
-
+plt.figure(4)
+plt.clf()
 hist = plt.hist(dist,bins=100,density=True,edgecolor='none')
 x,y = gauss(x0=np.mean(dist),sig=np.std(dist))
 plt.plot(x,y,'r--')
@@ -55,3 +67,18 @@ xlim = plt.xlim(0.98,1.02)
 
 ad, p = statsmodels.stats.diagnostic.normal_ad(dist)
 print(p)
+
+
+'''
+js comments
+-----------
+- No commenting again! Oh no!!!
+
+- Cool plots! I suggest you use interactive plotting for smoother
+  script running. 
+
+- Where's the threshold for averaging your distributions in order to
+  achieve consistency with a Normal dist?
+
+8/10
+'''  
