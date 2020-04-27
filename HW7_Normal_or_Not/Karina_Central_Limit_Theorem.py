@@ -58,3 +58,15 @@ xlim = plt.xlim(1.56,1.74)
 """ Andersen-Darling Test """
 ad, p = statsmodels.stats.diagnostic.normal_ad(dist)
 print(p)
+
+'''
+js comments
+-----------
+- Binning on final plot is a bit sparse
+
+- Where is the threshold for number of averages to be consistent
+  with normal dist?
+
+9/10
+'''
+

@@ -61,3 +61,19 @@ print(pval)
 # %%
 
 
+'''
+js comments
+-----------
+- You can get rid of the residual comments from the other assigment. 
+
+- Comments could be more comprehensive
+
+- Use density instead of normed for histogram call
+
+- Results look good. Where is the threshold of number of averages before you
+  are consistent with Normal?
+
+8/10
+
+'''
+
