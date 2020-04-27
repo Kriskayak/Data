@@ -1,16 +1,33 @@
+"""
+GDP per capita, PPP:  based on purchasing power parity (PPP)
+1990 – 2017
+2011 international dollars
+Published by: World Bank – World Development Indicators
+
+Healthcare Expenditure per Capita, PPP: sum of public and private health expenditures as a ratio of total population
+1995 – 2014
+Published by: World Bank – World Development Indicators
+Source: World Health Organization Global Health Expenditure database
+"Limitations and exceptions: Country data may differ in terms of definitions, data collection methods, population coverage and estimation methods used."
+
+Total Population: based on Gapminder data, HYDE, and UN Population Division (2019) estimates
+10000 BCE – 2019
+Published by: Gapminder, HYDE (2016) and United Nations Population Division (2019)
+
+"""
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
-df= pd.read_csv("/Users/jennifer/Jen_Data_Science/healthcare-expenditure-vs-gdp.csv", sep=',')
+df= pd.read_csv("/Users/jennifer/Jen_Data_Science/datasci2020/Projects/Jennifer/healthcare-expenditure-vs-gdp.csv", sep=',')
 
 type(df)
 
 len(df)
 
-data= pd.read_csv('/Users/jennifer/Jen_Data_Science/healthcare-expenditure-vs-gdp.csv', sep=',',
-                  usecols=[0,1,2,3,4],
-                  skiprows=[0],header=0,names=['Country','Code','Year','GDP per Capita','Healthcare Expenditure per Capita'])
+data= pd.read_csv("/Users/jennifer/Jen_Data_Science/datasci2020/Projects/Jennifer/healthcare-expenditure-vs-gdp.csv", sep=',',
+                  usecols=[0,1,2,3,4,5],
+                  skiprows=[0],header=0,names=['Country','Code','Year','GDP per Capita','Healthcare Expenditure per Capita','Population'])
 
 df.shape
 
