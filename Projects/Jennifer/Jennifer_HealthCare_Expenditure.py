@@ -21,11 +21,19 @@ import numpy as np
 
 df= pd.read_csv("/Users/jennifer/Jen_Data_Science/datasci2020/Projects/Jennifer/healthcare-expenditure-vs-gdp.csv", sep=',')
 
+df.columns=['Country','Code','Year','GDP per Capita','Healthcare Expenditure','Population']
+
 type(df)
 
 len(df)
 
 df.shape
+
+#United States
+gk = df.groupby('Country')
+uc = gk.get_group('United States')
+uc = uc.drop(columns=['Code','Population'])
+
 
 # Over here we see the columns names and their data types
 df.dtypes
@@ -54,36 +62,10 @@ df = df.dropna(axis = 0, how = 'any')  #drop rows with any column having np.nan 
 #df.rename(index =str, columns = {'patient_id':'patient_id'})
 df
 
-
-# This allows us to drop rows with any missing values in them.
-# 
-# ## Inspecting duplicates
-# To view repeating rows we can start off by looking at the number of unique values in each column.
-
-# In[13]:
-
-
-# Here we list all columns
-df.columns
-
-
-# In[14]:
-
-
 # the number changed cuz we dropped all the isna's
 len(df)
 
-
-# In[15]:
-
-
-# Its good to inspect your unique key identifier
 df.nunique()
-
-
-# We see here that although there are 690 rows, there are only 637 unique patient_id’s. This could mean that some patient appear more than once in the dataset. To isolate these patients and view their data, we use the following:
-
-# In[16]:
 
 
 # This shows rows that show up more than once and have the exact same column values. 
