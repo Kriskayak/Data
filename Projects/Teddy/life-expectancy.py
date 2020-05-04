@@ -9,6 +9,13 @@ Created on Thu Apr 16 13:07:01 2020
 import pandas as pd
 df = pd.read_csv('life-expectancy-years-vs-real-gdp-per-capita-2011us.csv')
 x = len(df)
+
+# js - I think this is what you are trying to do...
+countryCode = 'AFG'
+country = df[df['Code'] == countryCode]
+
+
+
 def countryData(countryCode = 'AFG'):
     country = pd.DataFrame(columns = ['Entity','Code','Year','Life expectancy at birth','Real GDP per capita in 2011US$ ($)','Population by country'])
     for i in range(x):
