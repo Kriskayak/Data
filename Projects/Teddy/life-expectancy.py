@@ -10,11 +10,11 @@ import pandas as pd
 df = pd.read_csv('life-expectancy-years-vs-real-gdp-per-capita-2011us.csv')
 x = len(df)
 def countryData(countryCode = 'AFG'):
-    vars()[countryCode] = pd.DataFrame(columns = ['Entity','Code','Year','Life expectancy at birth','Real GDP per capita in 2011US$ ($)','Population by country'])
+    country = pd.DataFrame(columns = ['Entity','Code','Year','Life expectancy at birth','Real GDP per capita in 2011US$ ($)','Population by country'])
     for i in range(x):
         if(df['Code'][i].equals(countryCode)):
-            vars()[countryCode] = pd.concat(vars()[countryCode],df[i])
-    return vars()[countryCode]
+            country = pd.concat(country,df[i])
+    return country
 codeList = []
 for i in range(x):
     if(df['Code'][i] in codeList == False):
