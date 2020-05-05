@@ -10,25 +10,40 @@ import pandas as pd
 df = pd.read_csv('life-expectancy-years-vs-real-gdp-per-capita-2011us.csv')
 x = len(df)
 
-# js - I think this is what you are trying to do...
-countryCode = 'AFG'
-country = df[df['Code'] == countryCode]
+def nContains(data,item):
+    for i in range(len(data)):
+        if(data[i]  == item):
+            return False
+    return True
 
-
-
-def countryData(countryCode = 'AFG'):
-    country = pd.DataFrame(columns = ['Entity','Code','Year','Life expectancy at birth','Real GDP per capita in 2011US$ ($)','Population by country'])
+def firstIndex(entity):
     for i in range(x):
-        if(df['Code'][i].equals(countryCode)):
-            country = pd.concat(country,df[i])
-    return country
-codeList = []
+        if(df['Entity'][i] == entity):
+            return i
+
+def lastIndex(entity):
+    e = 0;
+    for i in range(x):
+        if(df['Entity'][i] == entity):
+            e = i
+    return e
+
+def countryData(entity = 'Afghanistan'):
+    s = firstIndex(entity)
+    e = lastIndex(entity) + 1
+    return df[s:e]
+
+entityList = []
 for i in range(x):
-    if(df['Code'][i] in codeList == False):
-        codeList.append(df['Code'][i])
-dataList = []
-for i in range(len(codeList)):
-    dataList.append(countryData(countryCode = codeList[i]))
+    if(nContains(entityList,df['Entity'][i])):
+        entityList.append(df['Entity'][i])
+
+
+
+data = {}
+for i in range(len(entityList)):
+    data.update({entityList[i] : countryData(entityList[i])})
+
 
 
 '''
