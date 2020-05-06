@@ -14,12 +14,16 @@ df['Life expectancy at birth'] = df['Life expectancy at birth'].fillna(0.0)
 df['Code'] = df['Code'].fillna('Na')
 x = len(df)
 
-
 def nContains(dataList,item):
     for i in range(len(dataList)):
         if(dataList[i]  == item):
             return False
     return True
+
+entityList = []
+for i in range(x):
+    if(nContains(entityList,df['Entity'][i])):
+        entityList.append(df['Entity'][i])
 
 def firstIndex(entity):
     for i in range(x):
@@ -33,15 +37,14 @@ def lastIndex(entity):
             e = i
     return e
 
-def countryData(entity = 'Afghanistan'):
+def countryData(entity):
     s = firstIndex(entity)
     e = lastIndex(entity) + 1
-    return df[s:e]
+    return df[s:e].reset_index(drop=True)
 
-entityList = []
-for i in range(x):
-    if(nContains(entityList,df['Entity'][i])):
-        entityList.append(df['Entity'][i])
+def countryDataYear(entity):
+    data = countryData(entity)
+    return data.set_index('Year',drop=True)
 
 def makeCountryDic():
     data = {}
@@ -49,7 +52,7 @@ def makeCountryDic():
         data.update({entityList[i] : countryData(entityList[i])})
     return data
 
-def plot2yearsGDP(first,second):
+def hist2yearsGDP(first,second):
     firstYear = []
     for i in range(x):
         if(df['Year'][i] ==  first and df['Real GDP per capita in 2011US$ ($)'][i] != 0.0 and df['Code'][i] != 'Na'):
@@ -61,7 +64,7 @@ def plot2yearsGDP(first,second):
     plt.hist(firstYear,bins=50,alpha=0.5)
     plt.hist(secondYear,bins=50,alpha=0.5)
 
-def plot2yearsLife(first,second):
+def hist2yearsLife(first,second):
     firstYear = []
     for i in range(x):
         if(df['Year'][i] == first and df['Life expectancy at birth'][i] != 0.0 and df['Code'][i] != 'Na'):
@@ -73,6 +76,29 @@ def plot2yearsLife(first,second):
     plt.hist(firstYear,bins=50,alpha=0.5)
     plt.hist(secondYear,bins=50,alpha=0.5)
 
+def plotCountryDataLifeGDP(country = 'Afghanistan'):
+    data = countryData(country)
+    for i in range(len(data)):
+        if(data['Real GDP per capita in 2011US$ ($)'][i] != 0.0 and data['Life expectancy at birth'][i] != 0.0):
+            plt.scatter(data['Real GDP per capita in 2011US$ ($)'][i],data['Life expectancy at birth'][i])
+    plt.xlabel('Real GDP per capita in 2011US$ ($)')
+    plt.ylabel('Life expectancy at birth')
+    
+def plotCountryDataLifeDate(country = 'Afghanistan'):
+    data = countryData(country)
+    for i in range(len(data)):
+        if(data['Life expectancy at birth'][i] != 0.0):
+            plt.scatter(data['Year'][i],data['Life expectancy at birth'][i])
+    plt.xlabel('Year')
+    plt.ylabel('Life expectancy at birth')
+
+def plotCountryDataGDPDate(country = 'Afghanistan'):
+    data = countryData(country)
+    for i in range(len(data)):
+        if(data['Real GDP per capita in 2011US$ ($)'][i] != 0.0):
+            plt.scatter(data['Year'][i],data['Real GDP per capita in 2011US$ ($)'][i])
+    plt.xlabel('Year')
+    plt.ylabel('Real GDP per capita in 2011US$ ($)')
 
 '''
 js comments
