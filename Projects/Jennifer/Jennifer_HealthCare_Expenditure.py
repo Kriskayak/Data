@@ -20,6 +20,13 @@ What we want to investigate: Population vs. Health Care Expenditure / GDP per ca
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
+from tqdm import tqdm
+from scipy import stats
+from scipy.stats import norm
+from scipy.stats import kstest
+from pandas.plotting import register_matplotlib_converters
+import statsmodels
+from statsmodels.stats.diagnostic import normal_ad
 
 df= pd.read_csv("/Users/jennifer/Jen_Data_Science/datasci2020/Projects/Jennifer/healthcare-expenditure-vs-gdp.csv", sep=',')
 
@@ -36,17 +43,16 @@ df.isna().sum()
 df = df.dropna(axis = 0, how = 'any')  #drop rows with any column having np.nan values
 
 len(df) #184 countries' data available for 2004
-df.nunique()
 
 df['hG'] =(df['Healthcare Expenditure']/df['GDP per Capita'])*100
 
-df = df[['Population','hG']]
+df = df[['Country','Population','hG']]
 
-hist = plt.hist((df, bins=np.logspace(np.log10(0.1),np.log10(1.0), 50)) density=True)
-plt.xlim(0,1)
+df.sort_values(by='hG')
+
+plt.hist(df['hG'], bins=20, density=True)
 plt.xlabel('Health Care Expenditure / GDP per capita(%)')
-plt.ylabel('Number of Countries')
-plt.ylim(0,100)
+plt.ylabel('Frequency')
 plt.legend()
 plt.title('Health Care Expenditure / GDP per capita')
 
@@ -60,35 +66,16 @@ print (df.median())
 ##The median seem similar for the two data sets.
 #41.8 vs. 42.5
 
-#Comparison Grahically: Both seem somewhat normal
-mean,std=norm.fit(dist1)
-plt.hist(dist1, bins=np.arange(50), density=True)
+#Normal?
+mean,std=norm.fit(df)
+plt.hist(df, bins=np.arange(50), density=True)
 xmin, xmax = plt.xlim(20,60)
 x = np.linspace(xmin, xmax, 100)
 y = norm.pdf(x, mean, std)
 plt.plot(x, y)
 plt.show()
 
-mean,std=norm.fit(dist2)
-plt.hist(dist2, bins=np.arange(50), density=True)
-xmin, xmax = plt.xlim(0,100)
-x = np.linspace(xmin, xmax, 100)
-y = norm.pdf(x, mean, std)
-plt.plot(x, y)
-plt.show()
-
-
 ##p-values Interpretation
-ad, p = statsmodels.stats.diagnostic.normal_ad(dist1)
+ad, p = statsmodels.stats.diagnostic.normal_ad(df)
 print(p)
-#p=0.98645, very high
-#Not normal?
-ad, p = statsmodels.stats.diagnostic.normal_ad(dist2)
-print(p)
-#p=0.88638, lower than first but still pretty high
 
-##2-variable KS test
-stats.ks_2samp(dist1, dist2)
-#KS statistic: 0.113 -> cannot reject hypothesis that the distributions come from the same parent
-#p-value: 0.002 -> can reject hypothesis that the distributions come from the same parent 
-#Conclusion: ?
