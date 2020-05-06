@@ -20,10 +20,10 @@ def nContains(dataList,item):
             return False
     return True
 
-entityList = []
+countries = []
 for i in range(x):
-    if(nContains(entityList,df['Entity'][i])):
-        entityList.append(df['Entity'][i])
+    if(nContains(countries,df['Entity'][i])):
+        countries.append(df['Entity'][i])
 
 def firstIndex(entity):
     for i in range(x):
@@ -48,8 +48,8 @@ def countryDataYear(entity):
 
 def makeCountryDic():
     data = {}
-    for i in range(len(entityList)):
-        data.update({entityList[i] : countryData(entityList[i])})
+    for i in range(len(countries)):
+        data.update({countries[i] : countryData(countries[i])})
     return data
 
 def hist2yearsGDP(first,second):
