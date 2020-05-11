@@ -57,7 +57,16 @@ print(pval)
 # so their value would not line up like a set of data from one source
 
 
-# %% [markdown]
-# This is a good start! You will need to convert this into a python script and work on development in an IDE. While juypter notebooks have some slick features, where they really are helpful is in pedagogy. But we don't need that. 
-# 
-# 10/10
+'''
+js comments
+-----------
+- What about the information about this "patience" statistic? How was this
+  quantified? What does it mean? Comments should go directly into this 
+  script
+
+- Otherwise, the analysis looks great!
+
+15/20
+
+
+'''
