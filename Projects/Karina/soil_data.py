@@ -40,6 +40,9 @@ plt.xlim(0,300)
 plt.xlabel('Soil Microbial Carbon (mmol/kg)')
 plt.ylabel('Frequency')
 plt.title('Soil Microbial Carbon')
+#------------
+# js comment
+# Don't use spaces in file names. You must specify tag (such as .png)
 plt.savefig('Soil Microbial Carbon Plot')
 
 
@@ -62,3 +65,17 @@ plt.plot(x,y,'r--')
 ad, p = statsmodels.stats.diagnostic.normal_ad(microbial_carbon) # A-D test anyways, it gets 0.0 lol
 print(p)
 
+
+'''
+js comments
+-----------
+ - PNG file of your plot?
+
+ - Couple buggy things (see above comments)
+
+ - Otherwise, good work!
+
+18/20
+
+
+'''
