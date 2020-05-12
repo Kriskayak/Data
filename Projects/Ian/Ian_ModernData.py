@@ -39,7 +39,7 @@ xlim = plt.xlim(-1.5,1.5)
 plt.title('Patience of all countries')
 plt.xlabel('Patience')
 plt.ylabel('Occurance')
-plt.savefig('Ian_ModernData.png',dpi=300)
+#plt.savefig('Ian_ModernData.png',dpi=300)
 
 # Anderson-Darling Test
 ad2,pval = normal_ad(x,axis=0)
@@ -49,33 +49,11 @@ print(pval)
 # so their value would not line up like a set of data from one source
 
 
+from scipy import stats
+#using the gaussian_kde to smooth
 
-#using the kde to do something, but it doesn't work
-
-#separate the data somehow
-#error can only tuple index with a multiindex
-d1 = df.Patience[df['Country'] == 'United States','Mexico','Canada']
-d2 = df.Patience[df['Year'] != 'United States','Mexico','Canada']
-
-def measure():
-    return d1+d2, d1-d2
-
-xmin = d1.min()
-xmax = d1.max()
-ymin = d2.min()
-ymax = d2.max()
-
-X, Y = np.mgrid[xmin:xmax:100j, ymin:ymax:100j]
-positions = np.vstack([X.ravel(), Y.ravel()])
-values = np.vstack([d1, d2])
-kernel = stats.gaussian_kde(values)
-Z = np.reshape(kernel(positions).T, X.shape)
-
-fig = plt.figure()
-ax = fig.add_subplot(111)
-ax.imshow(np.rot90(Z), cmap=plt.cm.gist_earth_r,
-           extent=[xmin, xmax, ymin, ymax])
-ax.plot(d1, d2, 'k.', markersize=2)
-ax.set_xlim([xmin, xmax])
-ax.set_ylim([ymin, ymax])
+kde = stats.gaussian_kde(x)
+x_plot = np.linspace(np.min(x), np.max(x), 1000)
+plt.plot(x_plot,kde.pdf(x_plot))
+#only plots a horizontal line, but histogram has density=True ??
 plt.show()
