@@ -16,6 +16,8 @@ def gauss(sig=1,x0=0):
 # load in the data
 # (for some reason would not load without the full file address)
 
+# js - Probably because your console was being run from somewhere else. Check
+# this by typing "pwd" in your ipython console.
 pd.options.display.max_columns =None
 pd.options.display.max_rows =40
 filename = 'D:\Code\Thacher\datasci2020\HW9_Dataset\Ian_data.csv'
@@ -34,12 +36,15 @@ dist2 = df.ordna
 
 # %%
 # filtering out the null values
+# js - slick! :) Pandas also has this capability. 
 dist1 = list(filter((-999.0).__ne__, dist1))
 
 
 # %%
 # first plot of data
+# js - normed -> density
 hist = plt.hist(dist1,bins=100,normed=True,edgecolor='none')
+
 plt.hist(dist2,bins=100,normed=True,edgecolor='none')
 
 # %%
@@ -50,6 +55,7 @@ dist2 = list(filter((80.0).__ne__, dist2))
 # would use median and stdev to filter anything lying too far out
 
 # new plot:
+# js - binning not exactly the same, only the number of bins!
 hist = plt.hist(dist1,bins=80,normed=True,edgecolor='none',label='pless')
 plt.hist(dist2,bins=80,normed=True,edgecolor='none',label='ordna')
 plt.xlabel('values')
@@ -99,3 +105,19 @@ ks_2samp(dist1,dist2)
 # these two distributions have similar values but are obviously from different sources
 # I would say that it's a coincedence, and a good way to show that even if data
 # look the same, they may be entirely different
+
+
+
+'''
+js comments
+-----------
+ - Great commenting!
+
+ - Legend on your histogram?
+
+ - Solid analysis and conclusion
+
+ 98/100
+
+'''
+

@@ -43,6 +43,10 @@ the outliers but didn't keep that in this code)
 pless = data['pless']
 ordna = data['ordna']
 
+
+# js - problem below is that the z scores are calculated from the data with
+# outliers in them!
+
 # Removing the p-less outliers
 pless_z = scipy.stats.zscore(pless)
 pless_z = np.abs(pless_z)
@@ -61,6 +65,7 @@ plt.ion()
 plt.figure()
 plt.clf()
 
+# js - Bins are a little big, and not the same for both histograms
 pless_hist = plt.hist(new_pless,alpha=0.5)
 ordna_hist = plt.hist(new_ordna,alpha=0.5)
 
@@ -99,6 +104,7 @@ categories = [new_pless, new_ordna]
 for x in categories:
     ad, p_ad = statsmodels.stats.diagnostic.normal_ad(x)
     print p_ad
+    # js - bug! p -> p_ad
     if p < 0.05:
         print "p is less than 0.05, so the data are not consistent with a normal model"
     else:
@@ -108,6 +114,7 @@ for x in categories:
 Because they are normal distributions, isn't the precision of the mean just the error? (#12)
 So 1 std on each is 68% confidence. Not sure if there's supposed to be something else.
 '''
+# js - Yes, SDOM! ^^
 
 # K-S test
 ks, p_ks = scipy.stats.ks_2samp(new_pless,new_ordna)
@@ -125,9 +132,26 @@ if p_t < 0.05:
 if p_t > 0.05:
     print "The means are consistent via the Student's t test"
 
+# js - confidence is 1-p! ^^
 
 '''
 The two distributions are both consistent with normal distributions (proved by the Andersen-Darling test), though
 they are not drawn from the same parent distribution (as shown by the Komolgov-Smirov test). The Student's t-test
 also shows that the means are not consistent. 
 '''
+
+'''
+js comments
+-----------
+ - Missed the fact that the y/n and 1/0 data designated the "bad" and "good" data.
+
+ - Legend on your histogram?
+
+ - Review the relationship between the confidence and the p value :)
+
+ - Great work overall!
+
+ 96/100
+
+'''
+

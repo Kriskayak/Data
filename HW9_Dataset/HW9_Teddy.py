@@ -17,9 +17,14 @@ df = pd.read_csv(filename,header=0,index_col=0)
 df['pless'] = df['pless'].fillna(0.0)
 df['ordna'] = df['ordna'].fillna(0.0)
 #set nan values to 0
+# js - why wouldn't you just reject them?
+
 #column names are pless, pfault ordna ofault and bin
 #I don't know what they mean
 
+# js - lists have funky functionality and should not be used
+# do analyze quantitative data. Best for qualitative data or
+# heterogenous data.
 pless = df['pless'].values.tolist()
 ordna = df['ordna'].values.tolist()
 #there are 555 rows of data with some bad values as 0 as well as outlieing data
@@ -28,6 +33,10 @@ for i in range(pless.count(0.0)):
     pless.remove(0.0)
 for i in range(ordna.count(0.0)):
     ordna.remove(0.0)
+
+# js - no need to do this if you vet data in pandas.
+# how did you decide to vet based on these values?
+
 #need to remove outlier values
 pless1 = []
 for i  in range(len(pless)):
@@ -69,3 +78,26 @@ print('Probability pless and ordna are consistant: ' + str(sp.ks_2samp(pless,ord
 #there is a high probablity that pless and ordna are consistant
 #both data sets have similar means, medians, and stds
 
+
+'''
+js comments
+-----------
+ - Careful setting nan values to 0!! Zero has meaning NaN does not!
+
+ - Can get rid of NaNs in one fell swoop in pandas. 
+
+ - Avoid the use of lists for quantitative data.
+
+ - Histograms have same number of bins, but the bins themselves are
+   not identical. 
+
+ - ordna data contains outlier. This skews your conclusions pretty severely.
+
+ - Your PNG plot is empty for some reason. 
+
+ - Commenting could be more comprehensive.
+
+80/100
+
+
+'''
