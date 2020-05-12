@@ -29,6 +29,7 @@ mad = statsmodels.robust.scale.mad(data)
 
 # Inverse erf: I don't understand how to get the highest/lowest value with this function or how to do sigma rejection with this function
 # What are you supposed to do if with it if the only domain it creates useful outputs for is -1 to 1 and the rest are infinity?
+# scipy.special.erf()
 erf = scipy.special.erfinv(data)
 
 # I understand sigma rejection, I don't understand inverse error
