@@ -20,6 +20,9 @@ def nContains(dataList,item):
             return False
     return True
 
+#-----------
+# js comment
+# Why not make this a method, too?
 countries = []
 for i in range(x):
     if(nContains(countries,df['Entity'][i])):
@@ -37,6 +40,7 @@ def lastIndex(entity):
             e = i
     return e
 
+# nice work on 
 def countryData(entity):
     s = firstIndex(entity)
     e = lastIndex(entity) + 1
@@ -52,15 +56,16 @@ def makeCountryDic():
         data.update({countries[i] : countryData(countries[i])})
     return data
 
+# The loops are not necessary. You can use boolean logic, or you can vet the data series
+# before plotting.
+
+# I converted the method below for you. Check out how much faster it is!
+
 def hist2yearsGDP(first,second):
-    firstYear = []
-    for i in range(x):
-        if(df['Year'][i] ==  first and df['Real GDP per capita in 2011US$ ($)'][i] != 0.0 and df['Code'][i] != 'Na'):
-            firstYear.append(df['Real GDP per capita in 2011US$ ($)'][i])
-    secondYear = []
-    for i in range(x):
-        if(df['Year'][i] ==  second and df['Real GDP per capita in 2011US$ ($)'][i] != 0.0 and df['Code'][i] != 'Na'):
-            secondYear.append(df['Real GDP per capita in 2011US$ ($)'][i])
+    firstYear = df[(df['Year'] == first)&(df['Real GDP per capita in 2011US$ ($)']!= 0.0)&
+                   (df['Code'] != 'Na')]['Real GDP per capita in 2011US$ ($)']
+    secondYear =  df[(df['Year'] == second)&(df['Real GDP per capita in 2011US$ ($)']!= 0.0)&
+                   (df['Code'] != 'Na')]['Real GDP per capita in 2011US$ ($)']
     plt.hist(firstYear,bins=50,alpha=0.5)
     plt.hist(secondYear,bins=50,alpha=0.5)
 
@@ -92,6 +97,7 @@ def plotCountryDataLifeDate(country = 'Afghanistan'):
     plt.xlabel('Year')
     plt.ylabel('Life expectancy at birth')
 
+# Put the country name in the plot
 def plotCountryDataGDPDate(country = 'Afghanistan'):
     data = countryData(country)
     for i in range(len(data)):
@@ -99,6 +105,36 @@ def plotCountryDataGDPDate(country = 'Afghanistan'):
             plt.scatter(data['Year'][i],data['Real GDP per capita in 2011US$ ($)'][i])
     plt.xlabel('Year')
     plt.ylabel('Real GDP per capita in 2011US$ ($)')
+
+
+
+
+'''
+js comments HW8
+---------------
+ - I love the modular form :)
+
+ - You should include more details about the plots in the plot (such as country name). 
+
+ - Loops are not necessary using pandas. See my above comments and modifications
+
+ - Test for gaussianity?
+
+ - PNG plot?
+
+ - You need to comment more regularly!
+
+12/20
+
+
+'''
+
+
+
+
+
+
+
 
 '''
 js comments
