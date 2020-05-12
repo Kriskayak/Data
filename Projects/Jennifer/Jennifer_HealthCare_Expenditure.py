@@ -28,6 +28,12 @@ from pandas.plotting import register_matplotlib_converters
 import statsmodels
 from statsmodels.stats.diagnostic import normal_ad
 
+
+#-----------
+# js comment
+# keep path separate. if you are running this from the same directory as the script
+# a simple filename will suffice.
+# don't need a sep=',' when that is what csv stands for (comma separated). 
 df= pd.read_csv("/Users/jennifer/Jen_Data_Science/datasci2020/Projects/Jennifer/healthcare-expenditure-vs-gdp.csv", sep=',')
 
 df.columns=['Country','Code','Year','GDP per Capita','Healthcare Expenditure','Population']
@@ -50,6 +56,12 @@ df = df[['Country','Population','hG']]
 
 df.sort_values(by='hG')
 
+#------------
+# js comments
+# best to do plotting interactively when exploring data.
+plt.ion()
+plt.figure()
+plt.clf()
 plt.hist(df['hG'], bins=20, density=True)
 plt.xlabel('Health Care Expenditure / GDP per capita(%)')
 plt.ylabel('Frequency')
@@ -58,6 +70,9 @@ plt.title('Health Care Expenditure / GDP per capita')
 
 #looks somewhat Gaussian but both datasets look to be skewed to the left
 
+#------------
+# js comments
+# buggy print statement
 print (df.describe())
 ##Both the mean and standard deviation vary greatly between the two data sets.
 #Mean: 41.9 vs. 42.5
@@ -67,15 +82,38 @@ print (df.median())
 #41.8 vs. 42.5
 
 #Normal?
-mean,std=norm.fit(df)
-plt.hist(df, bins=np.arange(50), density=True)
-xmin, xmax = plt.xlim(20,60)
+#------------
+# js comments
+# This next line is buggy... you needed an hG key...
+# Also this plotting did not work out for me...
+mean,std=norm.fit(df['hG'])
+plt.hist(df['hG'], bins=np.arange(50), density=True)
+# Take out the arguments of the xlim call...
+xmin, xmax = plt.xlim()
 x = np.linspace(xmin, xmax, 100)
 y = norm.pdf(x, mean, std)
 plt.plot(x, y)
-plt.show()
+# Don't need the next line when you're using interactive plotting...
+#plt.show()
 
 ##p-values Interpretation
-ad, p = statsmodels.stats.diagnostic.normal_ad(df)
+ad, p = statsmodels.stats.diagnostic.normal_ad(df['hG'])
 print(p)
+
+
+'''
+js comments
+-----------
+ - Save plot to PNG file?
+
+ - I appreciate the block comment at the top of this script. Very useful!
+
+ - Your plotting has several bugs. See above. Your approach looks sound, but 
+   a bit is lacking in the execution. 
+
+ - Conclusions?
+
+15/20
+'''
+
 
