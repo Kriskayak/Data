@@ -36,6 +36,7 @@ df2 = sigma_clip(df,sigma=2)
 #print(df2)
 
 # removed 24 points
+# js - way too many points for the probability level prescribed!
 
 
 ''' didn't work because the values in the new array don't match anything, ended up scrapping due to use of sigma_clip
@@ -59,3 +60,16 @@ print(np.std(df2))
 # comparing the orignal median and MAD to the new mean and stdev, it shows that
 # median and MAD are much more accurate than mean and stdev withOUT sigma rejection,
 # so they can be seen as a better estimation for the original dataset
+
+'''
+js comments
+-----------
+ - There are sigma clip algorithms already written, your task was to understand
+   how it works by writing your own. 
+
+ - The sigmaclip parameters were way too stringent, and did not conform to the 
+   directions
+
+5/20
+
+'''

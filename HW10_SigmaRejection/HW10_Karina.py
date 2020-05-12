@@ -49,3 +49,24 @@ print mad, mad_sr
  allows the median and mad calculations to be more representative of the majority
  of the data.
 '''
+
+
+'''
+js comments
+-----------
+ - You are not understanding what the error function is and how it is used. It
+   returns a probability. The inverse error function is needed. 
+
+ - There are sigma clip algorithms already written, your task was to understand
+   how it works by writing your own. 
+
+ - The sigmaclip parameters were way too stringent, and did not conform to the 
+   directions
+
+ - The sigma-rejected array is not valid
+
+5/20
+
+'''
+
+
