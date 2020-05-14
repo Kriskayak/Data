@@ -1,6 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
+from scipy.stats import gaussian_kde
 import statsmodels
 from statsmodels.stats.diagnostic import normal_ad
 
@@ -40,10 +41,7 @@ plt.xlim(0,300)
 plt.xlabel('Soil Microbial Carbon (mmol/kg)')
 plt.ylabel('Frequency')
 plt.title('Soil Microbial Carbon')
-#------------
-# js comment
-# Don't use spaces in file names. You must specify tag (such as .png)
-plt.savefig('Soil Microbial Carbon Plot')
+plt.savefig('Soil_Microbial_Carbon_Plot.png')
 
 
 microbial_carbon = microbial_carbon.to_frame() # Get rid of the outliers and get std/mean
@@ -62,20 +60,18 @@ def gauss(sig=1,x0=0): # Gaussian function
 x,y = gauss(sig=std,x0=mean) # Obviously not a Gaussian, I think it could be lognormal but I don't know how to fit that
 plt.plot(x,y,'r--')
 
-ad, p = statsmodels.stats.diagnostic.normal_ad(microbial_carbon) # A-D test anyways, it gets 0.0 lol
+ad, p = normal_ad(microbial_carbon) # A-D test anyways, it gets 0.0 lol
 print(p)
 
+plt.ion()
+plt.figure()
 
-'''
-js comments
------------
- - PNG file of your plot?
+kde = gaussian_kde(microbial_carbon)
+xvals = np.linspace(0, 300, 10000)
 
- - Couple buggy things (see above comments)
-
- - Otherwise, good work!
-
-18/20
-
-
-'''
+plt.plot(xvals,kde.pdf(xvals),'r--')
+plt.xlim(0,300)
+plt.hist(microbial_carbon,bins=np.arange(50)*6,density=True)
+plt.ylabel('$p(microbial carbon)',fontsize=18)
+plt.xlabel('microbial_carbon',fontsize=18)
+plt.savefig('Microbial_Carbon_KDE.png')
