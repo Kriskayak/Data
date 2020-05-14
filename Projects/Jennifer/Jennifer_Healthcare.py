@@ -123,41 +123,26 @@ Jennifer Yim:
 'Produce a KDE of some subset of the data that you are working with and push a 
 PNG version of a plot into your Projects/Name directory in the repo.''
 """
+from scipy.stats import gaussian_kde
+import numpy as np
+import matplotlib.pyplot as plt
+
 df= pd.read_csv("/Users/jennifer/Jen_Data_Science/datasci2020/Projects/Jennifer/healthcare-expenditure-vs-gdp.csv")
 df.columns=['Country','Code','Year','GDP per Capita','Healthcare Expenditure','Population']
 df = df.dropna(axis = 0, how = 'any')
 df['hG'] =(df['Healthcare Expenditure']/df['GDP per Capita'])*100
-d1 = df.loc[df['Year'] == '2004']
-d2 = df.loc[df['Year'] == '2005']
-d1 = d1['hG']
-d2 = d2['hG']
+df = df.loc[df['Year'] == '2004']
 
-from scipy import stats
-def measure():
-    return d1+d2, d1-d2
-
-xmin = d1.min()
-xmax = d1.max()
-ymin = d2.min()
-ymax = d2.max()
-
-X, Y = np.mgrid[xmin:xmax:100j, ymin:ymax:100j]
-positions = np.vstack([X.ravel(), Y.ravel()])
-values = np.vstack([d1, d2])
-kernel = stats.gaussian_kde(values)
-Z = np.reshape(kernel(positions).T, X.shape)
-
-import matplotlib.pyplot as plt
-fig = plt.figure()
-ax = fig.add_subplot(111)
-ax.imshow(np.rot90(Z), cmap=plt.cm.gist_earth_r,
-           extent=[xmin, xmax, ymin, ymax])
-ax.plot(d1, d2, 'k.', markersize=2)
-ax.set_xlim([xmin, xmax])
-ax.set_ylim([ymin, ymax])
-ax.set_title('2004 vs. 2005 Healthcare expenditure/GDP per capita (%)')
-ax.set_xlabel('2004 H.E./GDP (%)')
-ax.set_ylabel('2005 H.E./GDP (%)')
+plt.ion() #opens interactive plot
+plt.figure()
+plt.clf()
+kde = gaussian_kde(df['hG'])
+xvals = np.linspace(np.min(df['hG']),np.max(df['hG']))
+plt.hist(df['hG'],bins=20,density=True)
+plt.plot(xvals,kde.pdf(xvals),'r--')
+plt.title('2004 Healthcare expenditure/GDP per capita (%)')
+plt.xlabel('2004 H.E./GDP (%)')
+plt.ylabel('Frequency')
 plt.show()
 
 
