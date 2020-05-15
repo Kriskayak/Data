@@ -110,11 +110,10 @@ def exponentialFitYearGDP(country = 'Afghanistan'):
     xpoints = []
     
     for i in range(len(data)):
-        try:
+        if(data['Real GDP per capita in 2011US$ ($)'][i] != 0.0):
             ypoints.append(np.log(data['Real GDP per capita in 2011US$ ($)'][i]))
             xpoints.append(data['Year'][i])
-        except ValueError or RuntimeWarning:
-            print('Bad data at ' + str(country) + ' index: ' + str(i))
+        
     #weights = 1.0/np.log((2020.0-y)/1000.0) talk to dr swift abou weights
 
     fit = np.polyfit(xpoints,ypoints,1,full=False,cov=True)
