@@ -88,7 +88,6 @@ df.median()
 mean,std=norm.fit(df['hG'])
 plt.hist(df['hG'], bins=np.arange(50), density=True)
 # Take out the arguments of the xlim call...
-""" 'xlim:(0,20) -> why not?"""
 xmin, xmax = plt.xlim()
 x = np.linspace(xmin, xmax, 100)
 y = norm.pdf(x, mean, std)
@@ -145,5 +144,70 @@ plt.xlabel('2004 H.E./GDP (%)')
 plt.ylabel('Frequency')
 plt.show()
 
+"""
+HW12
+Fitting a Line 
+"""
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+import scipy
+from scipy.special import erf, erfinv
+import statsmodels
+from statsmodels import robust
 
+df = pd.read_csv("/Users/jennifer/Jen_Data_Science/datasci2020/Projects/Jennifer/healthcare-expenditure-vs-gdp.csv")
+df.columns=['Country','Code','Year','GDP per Capita','Healthcare Expenditure','Population']
+df = df.dropna(axis = 0, how = 'any')
+df = df.loc[df['Year'] == '2004']
+xvals = df['GDP per Capita']
+yvals = df['Healthcare Expenditure']
+yerror = np.std(df['Healthcare Expenditure'])
+
+# Create a plot with the two variables & the data points' error bar (1 sigma): GDP per capita and Healthcare Expenditure 
+plt.ion() 
+plt.figure()
+plt.clf()
+plt.errorbar(xvals,yvals,yerr=yerror,fmt='o',color='black')
+plt.xlabel('GDP per Capita')
+plt.ylabel('Healthcare Expenditure')
+
+fit = np.polyfit(xvals,yvals,1,full=False,cov=True)
+fitparams = fit[0]
+slope = fitparams[0]
+intercept = fitparams[1]
+
+#Covariance, parameter, slope, and intercept errors
+cov = fit[1]
+param_error = np.sqrt(np.diagonal(cov))
+slope_error = param_error[0]
+intercept_error = param_error[1]
+
+#Plot with the Line of Best Fit
+plt.clf()
+plt.errorbar(xvals,yvals,yerr=yerror,fmt='o',color='black')
+plt.xlabel('GDP per Capita')
+plt.ylabel('Healthcare Expenditure')
+xfit = np.linspace(plt.xlim()[0],plt.xlim()[1],100)
+yfit = intercept + slope*xfit
+plt.plot(xfit,yfit,'r--')
+
+#Shifting data (I don't fully understand what I am supposed to do for this part)
+median = np.median(df['GDP per Capita'])
+newx  = xvals - np.median(df['GDP per Capita'])
+fit = np.polyfit(newx,yvals,1,full=False,cov=True)
+fitparams = fit[0]
+slope = fitparams[0]
+intercept = fitparams[1]
+
+plt.clf()
+plt.errorbar(newx,yvals,yerr=yerror,fmt='o',color='black')
+plt.xlabel('GDP per Capita')
+plt.ylabel('Healthcare Expenditure')
+xfit = np.linspace(plt.xlim()[0],plt.xlim()[1],100)
+yfit = intercept + slope*xfit
+plt.plot(xfit,yfit,'r--')
 
