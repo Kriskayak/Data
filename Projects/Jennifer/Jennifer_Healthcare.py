@@ -165,9 +165,9 @@ df = df.dropna(axis = 0, how = 'any')
 df = df.loc[df['Year'] == '2004']
 xvals = df['GDP per Capita']
 yvals = df['Healthcare Expenditure']
-yerror = np.std(df['Healthcare Expenditure'])
+yerror = np.std(df['Healthcare Expenditure']) # how do you find error bars for each datapoint?
 
-# Create a plot with the two variables & the data points' error bar (1 sigma): GDP per capita and Healthcare Expenditure 
+# Create a plot with the two variables & the data points' error bar (1 sigma?: over-calculated): GDP per capita and Healthcare Expenditure 
 plt.ion() 
 plt.figure()
 plt.clf()
@@ -210,4 +210,53 @@ plt.ylabel('Healthcare Expenditure')
 xfit = np.linspace(plt.xlim()[0],plt.xlim()[1],100)
 yfit = intercept + slope*xfit
 plt.plot(xfit,yfit,'r--')
+
+"""
+Likelihood Functions:
+    "You will need to choose a model and construct a log-likelihood function 
+    for your data given your model. You will add this function in your script 
+    in the Projects directory of our repo."
+"""
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+import scipy
+from scipy.special import erf, erfinv
+import statsmodels
+from statsmodels import robust
+
+df = pd.read_csv("/Users/jennifer/Jen_Data_Science/datasci2020/Projects/Jennifer/healthcare-expenditure-vs-gdp.csv")
+df.columns=['Country','Code','Year','GDP per Capita','Healthcare Expenditure','Population']
+df = df.dropna(axis = 0, how = 'any')
+
+data = []
+data1 = [] # 1~1000
+data2 = [] # 1001~10000
+data3 = [] # 10001~
+
+for i in data:
+	if float(i[3]) < 1000:
+		data1.append([float(i[3]), float(i[4]) / float(i[3])])
+	elif float(i[3]) < 10000:
+		data2.append([float(i[3]), float(i[4]) / float(i[3])])
+	else:
+		data3.append([float(i[3]), float(i[4]) / float(i[3])])
+        
+
+len(data1)
+len(data2)
+len(data3)
+
+def loglikelihood (x,mean,ScaleValue):
+    return norm(loc=mean(x),scale=ScaleValue).logpdf(x)
+
+mean = mean(x)
+#ScaleValue determines width
+
+
+
+
 
