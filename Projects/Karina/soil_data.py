@@ -46,7 +46,8 @@ plt.savefig('Soil_Microbial_Carbon_Plot.png')
 
 microbial_carbon = microbial_carbon.to_frame() # Get rid of the outliers and get std/mean
 microbial_carbon = microbial_carbon.query('0 <= Soil_microbial_biomass_carbon <= 300')
-microbial_carbon = microbial_carbon.to_numpy()
+# js - flatten array, too...
+microbial_carbon = microbial_carbon.to_numpy().flatten()
 std = np.std(microbial_carbon)
 mean = np.mean(microbial_carbon)
 print(std, mean)
@@ -72,6 +73,6 @@ xvals = np.linspace(0, 300, 10000)
 plt.plot(xvals,kde.pdf(xvals),'r--')
 plt.xlim(0,300)
 plt.hist(microbial_carbon,bins=np.arange(50)*6,density=True)
-plt.ylabel('$p(microbial carbon)',fontsize=18)
+plt.ylabel(r'$p$(microbial carbon)',fontsize=18)
 plt.xlabel('microbial_carbon',fontsize=18)
 plt.savefig('Microbial_Carbon_KDE.png')
