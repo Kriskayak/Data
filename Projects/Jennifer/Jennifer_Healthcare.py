@@ -165,9 +165,9 @@ df = df.dropna(axis = 0, how = 'any')
 df = df.loc[df['Year'] == '2004']
 xvals = df['GDP per Capita']
 yvals = df['Healthcare Expenditure']
-yerror = np.std(df['Healthcare Expenditure'])
+yerror = np.std(df['Healthcare Expenditure']) # how do you find error bars for each datapoint?
 
-# Create a plot with the two variables & the data points' error bar (1 sigma): GDP per capita and Healthcare Expenditure 
+# Create a plot with the two variables & the data points' error bar (1 sigma?: over-calculated): GDP per capita and Healthcare Expenditure 
 plt.ion() 
 plt.figure()
 plt.clf()
@@ -210,4 +210,84 @@ plt.ylabel('Healthcare Expenditure')
 xfit = np.linspace(plt.xlim()[0],plt.xlim()[1],100)
 yfit = intercept + slope*xfit
 plt.plot(xfit,yfit,'r--')
+
+"""
+New subset of data that I'm interested in
+"""
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import numpy as np
+import scipy
+from scipy import stats
+from scipy.stats import norm
+
+f = open("/Users/jennifer/Jen_Data_Science/datasci2020/Projects/Jennifer/healthcare-expenditure-vs-gdp.csv")
+	
+data = []
+for i in f.readlines()[1:]:
+	if i.split(",")[3] != '' and i.split(",")[4] != '':
+		data.append(i.split(","))
+
+data1 = [] # 1~1000
+data2 = [] # 1001~10000
+data3 = [] # 10001~
+
+for i in data:
+	if float(i[3]) < 1000:
+		data1.append([float(i[3]), float(i[4]) / float(i[3])])
+	elif float(i[3]) < 10000:
+		data2.append([float(i[3]), float(i[4]) / float(i[3])])
+	else:
+		data3.append([float(i[3]), float(i[4]) / float(i[3])])
+        
+len(data1) #172
+len(data2) #2309
+len(data3) #2044
+
+xValues = []
+yValues = []
+
+for i in data1:
+	xValues.append(i[0])
+	yValues.append(i[1])
+	
+
+plt.scatter(xValues, yValues)
+plt.xlabel("GDP per capita (int.-$)")
+plt.ylabel("Healthcare Expenditure per capita / GDP per capita (int.-$) ")
+plt.show() #Hmm I can't really see a trend
+
+
+for i in np.arange(0, 0.25, 0.01):
+	xValues.append(i)
+	cnt = 0
+	for j in data3:
+		if j[1] >= i and j[1] <= i+0.01:
+			cnt = cnt + 1
+	yValues.append(cnt)
+
+"""
+Likelihood Functions:
+    "You will need to choose a model and construct a log-likelihood function 
+    for your data given your model. You will add this function in your script 
+    in the Projects directory of our repo."
+"""
+
+def logLikelihood(x, mean):
+	return norm(loc=mean).logpdf(x)
+
+L1 = logLikelihood(data1, np.mean(data1)) #-> array?
+np.amax(L1) #-92.2979
+#IDK what I should do with this... hm
+
+
+
+
+
+
+
+
+
+
 
