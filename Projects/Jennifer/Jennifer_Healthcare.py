@@ -212,27 +212,23 @@ yfit = intercept + slope*xfit
 plt.plot(xfit,yfit,'r--')
 
 """
-Likelihood Functions:
-    "You will need to choose a model and construct a log-likelihood function 
-    for your data given your model. You will add this function in your script 
-    in the Projects directory of our repo."
+New subset of data that I'm interested in
 """
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import pandas as pd
-import matplotlib.pyplot as plt
 import numpy as np
 import scipy
-from scipy.special import erf, erfinv
-import statsmodels
-from statsmodels import robust
+from scipy import stats
+from scipy.stats import norm
 
-df = pd.read_csv("/Users/jennifer/Jen_Data_Science/datasci2020/Projects/Jennifer/healthcare-expenditure-vs-gdp.csv")
-df.columns=['Country','Code','Year','GDP per Capita','Healthcare Expenditure','Population']
-df = df.dropna(axis = 0, how = 'any')
-
+f = open("/Users/jennifer/Jen_Data_Science/datasci2020/Projects/Jennifer/healthcare-expenditure-vs-gdp.csv")
+	
 data = []
+for i in f.readlines()[1:]:
+	if i.split(",")[3] != '' and i.split(",")[4] != '':
+		data.append(i.split(","))
+
 data1 = [] # 1~1000
 data2 = [] # 1001~10000
 data3 = [] # 10001~
@@ -245,16 +241,51 @@ for i in data:
 	else:
 		data3.append([float(i[3]), float(i[4]) / float(i[3])])
         
+len(data1) #172
+len(data2) #2309
+len(data3) #2044
 
-len(data1)
-len(data2)
-len(data3)
+xValues = []
+yValues = []
 
-def loglikelihood (x,mean,ScaleValue):
-    return norm(loc=mean(x),scale=ScaleValue).logpdf(x)
+for i in data1:
+	xValues.append(i[0])
+	yValues.append(i[1])
+	
 
-mean = mean(x)
-#ScaleValue determines width
+plt.scatter(xValues, yValues)
+plt.xlabel("GDP per capita (int.-$)")
+plt.ylabel("Healthcare Expenditure per capita / GDP per capita (int.-$) ")
+plt.show() #Hmm I can't really see a trend
+
+
+for i in np.arange(0, 0.25, 0.01):
+	xValues.append(i)
+	cnt = 0
+	for j in data3:
+		if j[1] >= i and j[1] <= i+0.01:
+			cnt = cnt + 1
+	yValues.append(cnt)
+
+"""
+Likelihood Functions:
+    "You will need to choose a model and construct a log-likelihood function 
+    for your data given your model. You will add this function in your script 
+    in the Projects directory of our repo."
+"""
+
+def logLikelihood(x, mean):
+	return norm(loc=mean).logpdf(x)
+
+L1 = logLikelihood(data1, np.mean(data1)) #-> array?
+np.amax(L1) #-92.2979
+#IDK what I should do with this... hm
+
+
+
+
+
+
 
 
 
