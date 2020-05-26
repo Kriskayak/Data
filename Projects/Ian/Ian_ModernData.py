@@ -136,3 +136,9 @@ print('Second parameter: %.3f' % second_cov)
 
 # my covariance values are the exact same, I suspect it has to due with the lack
 # of weighting the points earlier when I couldn't figure it out
+
+
+'''
+log-likelihood function
+'''
+#watched video and tried to understand reading, but don't know how to apply it
