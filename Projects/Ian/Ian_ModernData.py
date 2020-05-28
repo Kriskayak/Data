@@ -142,9 +142,7 @@ print('Second parameter: %.3f' % second_cov)
 '''
 log-likelihood function
 '''
-# can't find anything useful on google
-# trying to adapt the chi-squared function from slides
-# need to figure out summation and different variables
+
 
 def chisqr(xbar,sigma):
     finalsum = 0
