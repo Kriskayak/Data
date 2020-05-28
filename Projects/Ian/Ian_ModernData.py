@@ -32,13 +32,14 @@ print(np.mean(x))
 print(np.std(x))
 
 # plotting another histogram with gaussian over it
-hist = plt.hist(x,bins=50,density=True,edgecolor='none')
+hist = plt.hist(x,bins=45,density=True,edgecolor='none')
 x,y = gauss(x0=np.mean(x),sig=np.std(x))
 plt.plot(x,y,'r--')
 xlim = plt.xlim(-1.5,1.5)
 plt.title('Patience of all countries')
 plt.xlabel('Patience')
 plt.ylabel('Occurance')
+plt.show()
 #plt.savefig('Ian_ModernData.png',dpi=300)
 
 # Anderson-Darling Test
@@ -141,4 +142,22 @@ print('Second parameter: %.3f' % second_cov)
 '''
 log-likelihood function
 '''
-#watched video and tried to understand reading, but don't know how to apply it
+# can't find anything useful on google
+# trying to adapt the chi-squared function from slides
+# need to figure out summation and different variables
+
+def chisqr(xbar,sigma):
+    finalsum = 0
+     
+    for x in patience:
+        y = (x - xbar)**2
+        z = y/(sigma**2)
+        finalsum += z
+    
+    return(finalsum)
+
+print(chisqr(np.mean(patience),np.std(patience)))
+#DOF = 74, expected chi2 value is 46
+
+# table says that probability of 75.999 is about 25%
+# therefore we can say this data is not gaussian
