@@ -13,9 +13,10 @@ Source: World Health Organization Global Health Expenditure database
 Total Population: based on Gapminder data, HYDE, and UN Population Division (2019) estimates
 10000 BCE – 2019
 Published by: Gapminder, HYDE (2016) and United Nations Population Division (2019)
-
-What we want to investigate: Population vs. Health Care Expenditure / GDP per capita 
-
+"""
+""""WARNING"""
+"""
+CODE REALLY MESSY + A LOT OF STUFF MISSIGN DUE TO PLAYING AROUND AND NOT SAVING FROM THE INTERACTIVE PLOT.. :(
 """
 import pandas as pd
 import matplotlib.pyplot as plt

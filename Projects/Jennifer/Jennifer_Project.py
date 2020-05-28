@@ -23,8 +23,10 @@ Published by: Gapminder, HYDE (2016) and United Nations Population Division (201
 
 What we want to investigate: Health Care Expenditure vs. GDP
 """
+"""WARNING"""
 """
 DATA SUPER MESSY RIGHT NOW SINCE I WAS WORKING ON IT UNTIL THE LAST MOMENT :(
+LOTS OF STUFF MISSING DUE TO NOT SAVING FROM TYPING IN THE INTERACTIVE CONSOLE...haha
 NEEDS SOME CLEANING UP + CLARIFYING
 """
 import pandas as pd
