@@ -87,7 +87,6 @@ df.median()
 """it did for me..?"""
 mean,std=norm.fit(df['hG'])
 plt.hist(df['hG'], bins=np.arange(50), density=True)
-# Take out the arguments of the xlim call...
 xmin, xmax = plt.xlim()
 x = np.linspace(xmin, xmax, 100)
 y = norm.pdf(x, mean, std)
@@ -251,21 +250,20 @@ yValues = []
 for i in data1:
 	xValues.append(i[0])
 	yValues.append(i[1])
-	
 
-plt.scatter(xValues, yValues)
-plt.xlabel("GDP per capita (int.-$)")
-plt.ylabel("Healthcare Expenditure per capita / GDP per capita (int.-$) ")
-plt.show() #Hmm I can't really see a trend
-
-
-for i in np.arange(0, 0.25, 0.01):
+for i in np.arange(0, 0.25, 0.01): # repeat for data1, data2, data3
 	xValues.append(i)
 	cnt = 0
-	for j in data3:
+	for j in data1:
 		if j[1] >= i and j[1] <= i+0.01:
 			cnt = cnt + 1
 	yValues.append(cnt)
+
+plt.ion()
+plt.figure()
+plt.plot(xValues, yValues)
+plt.title("gdp10001~")
+plt.show()
 
 """
 Likelihood Functions:
@@ -274,20 +272,31 @@ Likelihood Functions:
     in the Projects directory of our repo."
 """
 
-def logLikelihood(x, mean):
-	return norm(loc=mean).logpdf(x)
+def logLikelihood(x, mean, scaleValue):
+	return norm(loc=mean, scale=scaleValue).logpdf(x)
 
-L1 = logLikelihood(data1, np.mean(data1)) #-> array?
-np.amax(L1) #-92.2979
-#IDK what I should do with this... hm
+mean = data1[int(len(data1)/2)][1]
+
+maxVal = 0.0
+maxScale = 0
+
+for scaleVal in np.arange(0.001, 0.2, 0.001):
+
+	mle = 0.0
+	for i in data1:
+		mle = mle + logLikelihood(float(i[1]), mean, scaleVal) 
+
+	if maxVal < mle:
+		maxVal = mle
+		maxScale = scaleVal
+
+	print (scaleVal, mle)
 
 
+print ("maxScale is : ", maxScale)
 
-
-
-
-
-
-
-
-
+"""
+data1 maxscale = 0.025
+data2 maxscale = 0.025
+data3 maxscale = 0.039
+"""
