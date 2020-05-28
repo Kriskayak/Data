@@ -88,8 +88,36 @@ plt.xlabel('Healthcare expenditure/GDP')
 plt.ylabel('Frequency')
 plt.show()
 
+
+def logLikelihood(x, mean, scaleValue):
+	return norm(loc=mean, scale=scaleValue).logpdf(x)
+
+mean = data1[int(len(data1)/2)][1]
+
+maxVal = 0.0
+maxScale = 0
+
+for scaleVal in np.arange(0.001, 0.2, 0.001):
+
+	mle = 0.0
+	for i in data1:
+		mle = mle + logLikelihood(float(i[1]), mean, scaleVal) 
+
+	if maxVal < mle:
+		maxVal = mle
+		maxScale = scaleVal
+
+	print (scaleVal, mle)
+
+
+print ("maxScale is : ", maxScale)
+
 """
+data1 maxscale = 0.025
+data2 maxscale = 0.025
+data3 maxscale = 0.039
 """
+
 from scipy.optimize import minimize
 
 def neg_log_lhood(s, x):
@@ -117,13 +145,13 @@ sol = minimize(neg_log_lhood, sigma_guess, args=(samples), jac=grad, method='bfg
 print(sol.message)
 
 if sol.success:
-    print('mean_final = {}'.format(sol.x[0]))
+    print('maxval = {}'.format(sol.x[0]))
 else:
     print('No solution found')
 """
-data1 : mean_final = 0.0546841781771
-data2 : mean_final = 0.0546088178282
-data3 : mean_final = 0.0645437296197
+data1 : maxval = 0.0546841781771
+data2 : maxval = 0.0546088178282
+data3 : maxval = 0.0645437296197
 """
 f_obs = []
 f_exp = []
@@ -147,6 +175,7 @@ chisquare(f_obs, f_exp)
 data1 = Power_divergenceResult(statistic=86.88991259430887, pvalue=4.686796196986366e-09)
 data2 = Power_divergenceResult(statistic=86.74714792926366, pvalue=4.945908679510005e-09)
 data3 = Power_divergenceResult(statistic=70.6190518718353, pvalue=1.7612409032468476e-06)
+Hmm why is it showing such low pvalues?
 """
 from scipy.stats import gaussian_kde
 import numpy as np
@@ -166,30 +195,6 @@ samples3 = []
 
 for i in data3:
 	samples3.append(float(i[1]))
-
-from scipy.stats import gaussian_kde
-import numpy as np
-
-def estimate_maxima(data):
-
-      kde = gaussian_kde(data)
-
-      no_dp = 172
-
-      dp = np.linspace(0, 10, no_dp)
-
-      probs = kde.evaluate(dp)
-
-      maxima_index = probs.argmax()
-
-      maxima = dp[maxima_index]
-
-      return maxima
-  
-estimate_maxima(samples)
-#data1 = 0.05847953216374269
-#data2 = 0.05847953216374269
-#data3 = 0.05847953216374269
 
 """
 With Sigma Rejection
