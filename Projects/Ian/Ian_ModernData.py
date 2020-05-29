@@ -32,6 +32,8 @@ print(np.mean(x))
 print(np.std(x))
 
 # plotting another histogram with gaussian over it
+
+# js = Bins can be adjusted with the bins keyword...
 hist = plt.hist(x,bins=45,density=True,edgecolor='none')
 x,y = gauss(x0=np.mean(x),sig=np.std(x))
 plt.plot(x,y,'r--')
@@ -53,11 +55,15 @@ print(pval)
 from scipy import stats
 # using the gaussian_kde to smooth
 
+# js - The "x" below does not correspond to your data!
+
 kde = stats.gaussian_kde(x)
 x_plot = np.linspace(np.min(x), np.max(x), 1000)
 plt.plot(x_plot,kde.pdf(x_plot))
 #only plots a horizontal line, but histogram has density=True ??
 #plt.show()
+
+# KDE Homework: 10/20
 
 
 
@@ -82,6 +88,7 @@ plt.ylabel('risk-taking')
 #plt.show()
 
 # line fitting
+# js - this would assume that there are no trends in the data. CAREFUL!
 riskWeights = 1.0/(riskError**2)
 
 # Fit a line to the data:
@@ -143,7 +150,10 @@ print('Second parameter: %.3f' % second_cov)
 log-likelihood function
 '''
 
-
+# js - chisq is not exactly a log likelihood.
+#      also you will want to use vector operations
+#      to speed things up.
+#      8/10
 def chisqr(xbar,sigma):
     finalsum = 0
      
@@ -159,3 +169,11 @@ print(chisqr(np.mean(patience),np.std(patience)))
 
 # table says that probability of 75.999 is about 25%
 # therefore we can say this data is not gaussian
+
+
+'''
+js comments
+-----------
+ - Well done overall. However, see my comments about data errors, KDE and likelihood function.
+
+'''
