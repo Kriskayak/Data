@@ -47,3 +47,12 @@ for name in df.columns[1:]:
     plt.xlabel('p')
     plt.ylabel('likelihood')
     plt.subplots_adjust(top=0.92, bottom=0.08, left=0.1, right=0.95, hspace=0.5, wspace=0.5)
+
+
+''' 
+js comments
+-----------
+ - These plots look great, Jennifer. Nice work!
+
+10/10
+'''
