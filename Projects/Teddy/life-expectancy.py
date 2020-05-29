@@ -10,6 +10,7 @@ import matplotlib.pyplot as  plt
 import pandas as pd
 import numpy as np
 import scipy as sp
+from scipy.optimize import curve_fit
 df = pd.read_csv('life-expectancy-years-vs-real-gdp-per-capita-2011us.csv')
 df['Real GDP per capita in 2011US$ ($)'] = df['Real GDP per capita in 2011US$ ($)'].fillna(0.0)
 df['Life expectancy at birth'] = df['Life expectancy at birth'].fillna(0.0)
@@ -154,7 +155,7 @@ def fitGDPCountry(country = 'United States'):
         if(data['Real GDP per capita in 2011US$ ($)'][i] != 0.0):
             x.append((float)(data['Year'][i]))
             y.append((float)(data['Real GDP per capita in 2011US$ ($)'][i]))
-    fit,cov = sp.optimize.curve_fit(exp,x,y)
+    fit,cov = curve_fit(exp,x,y)
     #plt.scatter(x,y)
     return fit,cov
 
@@ -166,7 +167,7 @@ def fitLECountry(country = 'United States'):
         if(data['Life expectancy at birth'][i] != 0.0):
             x.append((float)(data['Year'][i]))
             y.append((float)(data['Life expectancy at birth'][i]))
-    fit,cov = sp.optimize.curve_fit(logistic,x,y)
+    fit,cov = curve_fit(logistic,x,y)
     #plt.scatter(x,y)
     #plt.plot(x,logistic(x,fit[1],fit[2],fit[3]),color = 'black')
     return fit,cov
@@ -190,10 +191,16 @@ def LEperGDPCountry(country = 'United States'):
 '''
 js comments
 -----------
- - You've got a pretty clean dataset, which is good. But you have a bit of 
-   cleaning up to do with this dataset. You have the tools to do this, it's
-   just a matter of doing it. 
+ - Well developed set of routines here to explore your data and nice use of pandas!
 
- - 9/10
+ - Commenting would be good ;)
+
+ - KDE? HW11 = 0/20
+
+ - I see you fit other curves to your data. You should make those
+   analyses more visible and easy to find.  HW12 = 20/20
+
+ - Likelihood function? 0/10
+
 
 '''
