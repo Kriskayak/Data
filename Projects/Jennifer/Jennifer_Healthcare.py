@@ -144,6 +144,15 @@ plt.xlabel('2004 H.E./GDP (%)')
 plt.ylabel('Frequency')
 plt.show()
 
+'''
+js comments
+-----------
+- Great work on this HW, Jennifer! Looks good
+
+20/20
+
+'''
+
 """
 HW12
 Fitting a Line 
@@ -196,6 +205,7 @@ yfit = intercept + slope*xfit
 plt.plot(xfit,yfit,'r--')
 
 #Shifting data (I don't fully understand what I am supposed to do for this part)
+# js - shifting data reduces the covariance between the slope and intercept. 
 median = np.median(df['GDP per Capita'])
 newx  = xvals - np.median(df['GDP per Capita'])
 fit = np.polyfit(newx,yvals,1,full=False,cov=True)
@@ -210,6 +220,16 @@ plt.ylabel('Healthcare Expenditure')
 xfit = np.linspace(plt.xlim()[0],plt.xlim()[1],100)
 yfit = intercept + slope*xfit
 plt.plot(xfit,yfit,'r--')
+'''
+js comments
+-----------
+ - You could have renamed variables so that you were not overwriting them.
+
+ - Commenting getting sparse
+
+18/20
+
+'''
 
 """
 New subset of data that I'm interested in
@@ -221,6 +241,9 @@ import numpy as np
 import scipy
 from scipy import stats
 from scipy.stats import norm
+
+# js - I applaud your resourcefulness here. Though pandas can slice up the data
+#      for you quite easily in this manner.
 
 f = open("/Users/jennifer/Jen_Data_Science/datasci2020/Projects/Jennifer/healthcare-expenditure-vs-gdp.csv")
 	
@@ -293,6 +316,9 @@ for scaleVal in np.arange(0.001, 0.2, 0.001):
 
 	print (scaleVal, mle)
 
+# js = I must admit that I don't really understand what it is you are doing with
+#      this code. It is a good attempt at creating a log likelihood function.
+#      But I am not convinced that is actually what is going on. 
 
 print ("maxScale is : ", maxScale)
 
@@ -301,3 +327,14 @@ data1 maxscale = 0.025
 data2 maxscale = 0.025
 data3 maxscale = 0.039
 """
+
+''' 
+js comments
+-----------
+ - A for effort, for sure. 
+
+ - Again, commenting would have been a big help here.
+
+9/10
+
+'''
