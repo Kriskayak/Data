@@ -48,5 +48,22 @@ def stdOfBias(bias = 0.5):
         std.append(np.std(vals))  
     flips = np.array(range(200))
     plt.plot(flips,std)
-            
+
+
+'''
+js comments
+-----------
+ - I appreciate the exploratory nature of this code. Did you come to any
+   conclusions about the STD of the bias as a function of flips? What
+   would you expect?
+
+ - Might want to add a plt.show() to the routines so that the plots
+   are automatically visualized.
+
+ - Commenting is also kind of absent.
+
+10/10
+
+'''
+
             
