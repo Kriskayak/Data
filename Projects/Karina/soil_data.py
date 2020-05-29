@@ -24,6 +24,8 @@ data_2015_simple = data_2015[['Country','CO2_emissions','GDP','Total_population'
 N = data_2015_simple.shape[0]
 
 # Preliminary scatter plot of data - Dif colors for each point, size of point corresponds to population
+
+# js - Well done visualization!
 np.random.seed(521)
 colors = np.random.rand(N)
 size = np.sqrt(np.sqrt(data_2015_simple['Total_population']))
@@ -44,6 +46,7 @@ annot = ax.annotate("", xy=(0,0), xytext=(20,20),textcoords="offset points",
                     arrowprops=dict(arrowstyle="->"))
 annot.set_visible(False)
 
+# js - This is so cool, btw!
 def update_annot(ind):
 
     pos = sc.get_offsets()[ind["ind"][0]]
@@ -76,6 +79,8 @@ fitparams = fit[0]
 slope = fitparams[0]
 intercept = fitparams[1]
 
+
+# js - the errors would be the square root of the covariance elements!
 cov = fit[1]
 param_error = np.sqrt(np.diagonal(cov))
 slope_error = param_error[0]
@@ -119,6 +124,8 @@ plt.xlabel('CO2 Emissions Per Capita',fontsize=12)
 plt.title('KDE Plot')
 #plt.savefig('CO2_Emissions_KDE.png')
 
+# js - Nice KDE
+
 # Log Likelihood for Linear Fit
 def log_likelihood(theta, x, y, yerr=1):
     m, b = theta
@@ -126,7 +133,11 @@ def log_likelihood(theta, x, y, yerr=1):
     sigma2 = yerr ** 2
     return -0.5 * np.sum((y - model) ** 2 / sigma2 + np.log(sigma2))
 
-np.random.seed(42)
+# Well done likelihood function.
+
+np.random.seed(42) # js - the answer to the universe??
+
+# js - did you steal this from DFM?... looks like Dan. 
 nll = lambda *args: -log_likelihood(*args)
 initial = np.array([slope, intercept]) + 0.1 * np.random.randn(2)
 soln = minimize(nll, initial, args=(x, y))
@@ -154,3 +165,15 @@ for i in range(ndim):
     ax.yaxis.set_label_coords(-0.1, 0.5)
 
 axes[-1].set_xlabel("step number")
+
+
+'''
+js comments
+-----------
+ - Well done Karina!
+
+ - Your analyses are solid, but you could have done more with the interpretation
+   of what is going on and why. Remember these analyses are for you to come to 
+   a deeper understanding.
+
+ - 
